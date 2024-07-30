@@ -1,0 +1,22 @@
+{
+  "name": "mahmoud-abdelsamad-mahmoud-sun-wed-7pm-exam-jobsearchapp-01156864422",
+  "version": "1.0.0",
+  "description": "This particular app describes searching for a job that is relevant to their domain or area of interest. ",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js"
+  },
+  "author": "Mahmoud Elzeny",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.19.2",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.2",
+    "nodemailer": "^6.9.14"
+  }
+}
