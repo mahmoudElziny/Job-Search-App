@@ -13,7 +13,7 @@ export const auth = () => {
             
             //distruct user token from headers in the request 
             const { token } = req.headers;
-          
+
             //check if there is token  
             if(!token){
                 return next( new ErrorHandlerClass({message: "Please signIn first , there is no token generated", statusCode: 400, position: "at auth api"}) );
@@ -35,7 +35,7 @@ export const auth = () => {
             } catch (error) {
                 return next( new ErrorHandlerClass({message: "Invalid Token payload", statusCode: 400, position: "at auth api"}) );
             }
-            
+
             //check if the token decoded is right
             if(!decodedData?._id){
                 return next( new ErrorHandlerClass({message: "Invalid Token payload", statusCode: 400, position: "at auth api"}) );     
@@ -44,6 +44,11 @@ export const auth = () => {
             //findUserId
             const user = await userModel.findById(decodedData._id).select("-password");
             
+            //check if user logedin 
+            if(user.status == "offline"){
+                return next( new ErrorHandlerClass({message: "Invalid Token payload, try login", statusCode: 400, position: "at auth api"}) );
+            }
+
             //check if the user exists
             if(!user){
                 return next( new ErrorHandlerClass({message: "Please signUp and try to login", statusCode: 404, position: "at auth api"}) );
