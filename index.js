@@ -24,6 +24,7 @@ app.use("/user", userRouter);
 //global responce error handler middleware
 app.use(globalResponse);
 
+//handle any error or any rejections in the code
 process.on('unhandledRejection', (err)=> {
     console.log('error', err);
 });
