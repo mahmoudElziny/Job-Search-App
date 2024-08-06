@@ -2,7 +2,7 @@ import BaseJoi from 'joi';
 import JoiDate from '@joi/date';
 
 import { systemRoles } from "../../utils/system-roles.utils.js";
-import {generalRules, objectIdRule} from "../../utils/general-rules.utils.js"
+import {generalRules, objectIdRule} from "../../utils/general-rules.utils.js";
 
 const Joi = BaseJoi.extend(JoiDate);
 
@@ -17,7 +17,6 @@ export const userRegistrationSchema = {
         DOB: Joi.date().format(['DD/MM/YYYY', 'DD-MM-YYYY']).less('now').required(),
         mobileNumber: Joi.string().pattern(/^01[0-2,5]{1}[0-9]{8}$/).required(),
         role: Joi.string().valid(systemRoles.USER, systemRoles.COMPANY_HR),
-        status: Joi.string().valid('online', 'offline'),
     }),
 }
 

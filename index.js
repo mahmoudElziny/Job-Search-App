@@ -2,7 +2,8 @@ import express from 'express';
 
 import { connectionDB } from "./DB/connection.js";
 import { globalResponse } from './src/middlewares/error-handler.middleware.js';
-import userRouter from './src/modules/User/user.routes.js'
+import userRouter from './src/modules/User/user.routes.js';
+import companyRouter from './src/modules/Company/company.routes.js'
 
 
 
@@ -20,6 +21,8 @@ app.use(express.json());
 
 //user router 
 app.use("/user", userRouter);
+//company router 
+app.use("/company", companyRouter);
 
 //global responce error handler middleware
 app.use(globalResponse);
