@@ -45,7 +45,7 @@ export const auth = () => {
             const user = await userModel.findById(decodedData._id).select("-password");
             
             //check if user logedin 
-            if(user.status == "offline"){
+            if(user.status != "online"){
                 return next( new ErrorHandlerClass({message: "Invalid Token payload, try login", statusCode: 400, position: "at auth api"}) );
             }
 

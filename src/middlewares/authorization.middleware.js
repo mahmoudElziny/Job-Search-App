@@ -1,4 +1,4 @@
-import { ErrorHandlerClass } from "../utils/error-class.utils";
+import { ErrorHandlerClass } from "../utils/error-class.utils.js";
 
 
 /**

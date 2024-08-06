@@ -1,9 +1,11 @@
-import { compareSync, hashSync } from "bcrypt";
-import userModel from "../../../DB/models/user.model.js";
 import jwt from "jsonwebtoken";
+import { ObjectId } from 'mongodb';
+import { compareSync, hashSync } from "bcrypt";
+
+import userModel from "../../../DB/models/user.model.js";
 import { sendEmailService } from "../../services/send-email.service.js";
 import { ErrorHandlerClass } from "../../utils/error-class.utils.js";
-import { ObjectId } from 'mongodb';
+
 
 
 /**
@@ -17,56 +19,45 @@ import { ObjectId } from 'mongodb';
 export const signUp = async (req, res, next) => {
 
     //distruct user info fields from body 
-    const { firstName, lastName, email, password, recoveryEmail, DOB, mobileNumber, role, status } = req.body;
+    const { firstName, lastName, email, password, recoveryEmail, DOB, mobileNumber, role } = req.body;
 
-    //ensure that required fields initialized
-    if (firstName && lastName && email && password && recoveryEmail && DOB && mobileNumber) {
+    //ensure that email is not exists
+    const isEmailExists = await userModel.findOne({ email });
 
-        //ensure that email is not exists
-        const isEmailExists = await userModel.findOne({ email });
-
-        if (isEmailExists) {
-            return next(new ErrorHandlerClass({
-                message: "Email already exists",
-                statusCode: 409,
-                position: "at registration api",
-                data: email
-            })
-            );
-        }
-
-        //hashing the password
-        const hashedPassword = hashSync(password, 12);
-
-        //create new user object
-        const userObject = new userModel({
-            firstName,
-            lastName,
-            userName: firstName.toLowerCase() + lastName.toLowerCase(),
-            email,
-            password: hashedPassword,
-            recoveryEmail,
-            DOB,
-            mobileNumber,
-            role,
-            status,
-            OTB: 123456,
-            OTBExpireDate: new Date()
-        });
-
-        //creating and saving new user object to database
-        const user = await userObject.save();
-
-        return res.status(201).json({ message: "user created", user });
-
-    } else {
+    if (isEmailExists) {
         return next(new ErrorHandlerClass({
-            message: "Initialize All Fields",
-            statusCode: 400,
-            position: "at registration api"
-        }
-        ));
+            message: "Email already exists",
+            statusCode: 409,
+            position: "at registration api",
+            data: email
+        })
+        );
     }
+
+    //hashing the password
+    const hashedPassword = hashSync(password, 12);
+
+    //create new user object
+    const userObject = new userModel({
+        firstName,
+        lastName,
+        userName: firstName.toLowerCase() + lastName.toLowerCase(),
+        email,
+        password: hashedPassword,
+        recoveryEmail,
+        DOB,
+        mobileNumber,
+        role,
+        status: "offline",
+        OTB: 123456,
+        OTBExpireDate: new Date()
+    });
+
+    //creating and saving new user object to database
+    const user = await userObject.save();
+    
+    //success response
+    return res.status(201).json({ message: "user created", user });
 }
 
 
@@ -171,19 +162,19 @@ export const updateAccount = async (req, res, next) => {
  */
 export const deleteAccount = async (req, res, next) => {
 
-    //distruct user ID from authUser
-    const {_id} = req.authUser;
-    
+    //distruct user ID from request authUser
+    const { _id } = req.authUser;
+
     //find the user by ID to be deleted
-    const user = await userModel.findByIdAndDelete( {_id: new ObjectId(_id)}); 
-    
+    const user = await userModel.findByIdAndDelete({ _id: new ObjectId(_id) });
+
     //return success response if user found 
-    if(user){
-        return res.status(202).json({ message: "user deleted successfully", data: user} );
+    if (user) {
+        return res.status(202).json({ message: "user deleted successfully", data: user });
     }
-    
+
     //if any error happend passes to error handler middleware
-    return next(new ErrorHandlerClass({message: "wrong user Id",position:"at deleteAccount api",statusCode:400}) );
+    return next(new ErrorHandlerClass({ message: "wrong user Id", position: "at deleteAccount api", statusCode: 400 }));
 
 }
 
@@ -197,20 +188,20 @@ export const deleteAccount = async (req, res, next) => {
  */
 export const getUserData = async (req, res, next) => {
 
-     //distruct user ID from authUser
+    //distruct user ID from authUser
     const { _id } = req.authUser;
-    
+
     //find user by ID
-    const user = await userModel.findById({_id: new ObjectId(_id)});
-    
+    const user = await userModel.findById({ _id: new ObjectId(_id) });
+
     //check if user found and return success response
-    if(user){
-        return res.status(202).json({message: "User found ", user});
+    if (user) {
+        return res.status(202).json({ message: "User found ", user });
     }
-    
+
     //if any error happend passes to error handler middleware
-    return next(new ErrorHandlerClass({message: "wrong user Id",position:"at getUserData api",statusCode:400}));
-    
+    return next(new ErrorHandlerClass({ message: "wrong user Id", position: "at getUserData api", statusCode: 400 }));
+
 }
 
 /**
@@ -227,15 +218,15 @@ export const getAnyUserDatabyId = async (req, res, next) => {
     const { _id } = req.query;
 
     //find user by ID and avoid returning critical data
-    const user = await userModel.findById({_id: new ObjectId(_id)}).select("-_id -password -recoveryEmail -OTB -OTBExpireDate -createdAt -updatedAt");
-    
+    const user = await userModel.findById({ _id: new ObjectId(_id) }).select("-_id -password -recoveryEmail -OTB -OTBExpireDate -createdAt -updatedAt");
+
     //check if user found and return success response
-    if(user){
-        return res.status(202).json({message: "User found ", user});
+    if (user) {
+        return res.status(202).json({ message: "User found ", user });
     }
-    
+
     //if any error happend passes to error handler middleware
-    return next(new ErrorHandlerClass({message: "wrong user Id",position:"at getAnyUserDatabyId api",statusCode:400}));
+    return next(new ErrorHandlerClass({ message: "wrong user Id", position: "at getAnyUserDatabyId api", statusCode: 400 }));
 }
 
 /**
@@ -247,33 +238,33 @@ export const getAnyUserDatabyId = async (req, res, next) => {
  * @description update user password 
  */
 export const updatePassword = async (req, res, next) => {
-    
+
     //distruct user Id from request authUser
     const { _id } = req.authUser;
     //distruct password & new password from request body
-    const {password, newPassword} = req.body;
-    
+    const { password, newPassword } = req.body;
+
     //find user by ID
-    const user = await userModel.findById({_id: new ObjectId(_id)}); 
-    
+    const user = await userModel.findById({ _id: new ObjectId(_id) });
+
     //check if user found 
-    if(user){
+    if (user) {
         //password hashing
         const passCheck = compareSync(password, user.password);
         //check if password match
-        if(passCheck){
+        if (passCheck) {
             //hashing the password
             const hashedPassword = hashSync(newPassword, 12);
             //update the new password
-            await userModel.updateOne({_id: new ObjectId(_id)},{password: hashedPassword});
+            await userModel.updateOne({ _id: new ObjectId(_id) }, { password: hashedPassword });
             //returning success response
-            return res.status(202).json({message: "password updated sucessfully"});
-        }else{
-            return next(new ErrorHandlerClass({message: "wrong password", statusCode:400, position:"at updatePassword api"}));
+            return res.status(202).json({ message: "password updated sucessfully" });
+        } else {
+            return next(new ErrorHandlerClass({ message: "wrong password", statusCode: 400, position: "at updatePassword api" }));
         }
     }
     //if any error happend passes to error handler middleware
-    return next(new ErrorHandlerClass({message: "can not find the user", statusCode:400, position:"at updatePassword api"}));
+    return next(new ErrorHandlerClass({ message: "can not find the user", statusCode: 400, position: "at updatePassword api" }));
 
 }
 
@@ -290,47 +281,47 @@ export const forgetPassword = async (req, res, next) => {
 
     //distruct user email from request body
     const { email } = req.body;
-    
+
     //check if email exists in database
-    const user = await userModel.findOne({email});
-    
+    const user = await userModel.findOne({ email });
+
     //check if user exists
-    if(user){
+    if (user) {
         //creating OTB from 6 numbers 
         const OTB = Math.floor(100000 + Math.random() * 900000);
         //set OTB expiration date to 3 minutes from now
-        const expDate = new Date(+ new Date() + (60000*3));
+        const expDate = new Date(+ new Date() + (60000 * 3));
 
         //sending email
         const isEmailSent = await sendEmailService({
             to: email,
             subject: "Welcome to Job Search App - here is your OTB to reset your password ",
             html: `<h1>Your OTB is ${OTB}</h1>`
-        }); 
-        
+        });
+
         //check any error in sending email happend and pass it to error handler
-        if(isEmailSent.rejected.length){
+        if (isEmailSent.rejected.length) {
             return next(new ErrorHandlerClass({
-            message: "sending Email is failed",
-            statusCode: 500,
-            position: "at forgetPassword api",
-            data: isEmailSent
-        }
-        ));
+                message: "sending Email is failed",
+                statusCode: 500,
+                position: "at forgetPassword api",
+                data: isEmailSent
+            }
+            ));
         }
 
         //save OTB & OTBExDate to user object in database
-        const updatedUser = await userModel.updateOne({email},{OTB, OTBExpireDate:expDate},{new: true});
+        const updatedUser = await userModel.updateOne({ email }, { OTB, OTBExpireDate: expDate }, { new: true });
         //check if user OTB & OTBExDate updated successfully to user object in database
-        if(!updatedUser){
-            return next(new ErrorHandlerClass({message: "something went wrong with updating the user OTB & OTBExDate", statusCode: 409, position:"at forgetPassword api"}));
+        if (!updatedUser) {
+            return next(new ErrorHandlerClass({ message: "something went wrong with updating the user OTB & OTBExDate", statusCode: 409, position: "at forgetPassword api" }));
         }
-        
-        //return success response
-        return res.status(202).json({message: "email successfully sent"});
 
-    }else{
-        return next(new ErrorHandlerClass({message: "can not find user with this email ", statusCode: 400, position:"at forgetpassword api"}));
+        //return success response
+        return res.status(202).json({ message: "email successfully sent" });
+
+    } else {
+        return next(new ErrorHandlerClass({ message: "can not find user with this email ", statusCode: 400, position: "at forgetpassword api" }));
     }
 
 }
@@ -346,29 +337,29 @@ export const forgetPassword = async (req, res, next) => {
 export const passwordReset = async (req, res, next) => {
     //distruct OTB & newPassword from request headers
     const { email, otb, newpassword } = req.headers;
-    
+
     //now date 
     const date = new Date();
-    
-     //find the user to reset his password
-    const user = await userModel.findOne({email});
+
+    //find the user to reset his password
+    const user = await userModel.findOne({ email });
 
     //check if OTB right & not expired
-    if(otb == user.OTB && date <= user.OTBExpireDate ){
+    if (otb == user.OTB && date <= user.OTBExpireDate) {
         //hashing the new password
         const hashedPassword = hashSync(newpassword, 12);
         //update the new password 
-        const userConfirmation = await userModel.findOneAndUpdate({ email }, {password: hashedPassword, status: "offline" }, { new: true }).select("-password -OTB");
+        const userConfirmation = await userModel.findOneAndUpdate({ email }, { password: hashedPassword, status: "offline" }, { new: true }).select("-password -OTB");
         //check if user updated successully 
-        if(!userConfirmation){
-            return next( new ErrorHandlerClass({message: "user not found", statusCode: 404, position: "at passwordReset api"}));
+        if (!userConfirmation) {
+            return next(new ErrorHandlerClass({ message: "user not found", statusCode: 404, position: "at passwordReset api" }));
         }
         //success response 
         res.status(200).json({ message: "user password updated successfully", userConfirmation });
-    }else{
+    } else {
         //check if wrong or expired OTB 
-        return next( new ErrorHandlerClass({message: "wrong or Expired OTB try again", statusCode: 404, position: "at passwordReset api"}));  
-    }  
+        return next(new ErrorHandlerClass({ message: "wrong or Expired OTB try again", statusCode: 404, position: "at passwordReset api" }));
+    }
 
 }
 
@@ -384,17 +375,17 @@ export const getAllAccountsAssociatedToSpecificRecoveryEmail = async (req, res, 
 
     //distruct email ffrom request body
     const { email } = req.body;
-    
+
     //find users by recoveryEmail
-    const users = await userModel.find({recoveryEmail: email}).exec();
-    
+    const users = await userModel.find({ recoveryEmail: email }).select("-password -OTB").exec();
+
     //check if users found and return success response
-    if(users){
-        return res.status(202).json({message: "Users found ", users});
+    if (users) {
+        return res.status(202).json({ message: "Users found ", users });
     }
-    
+
     //if any error happend passes to error handler middleware
-    return next(new ErrorHandlerClass({message: "can not find users assosiated to this email", position:"at getAllAccountsAssociatedToSpecificRecoveryEmail api", statusCode:400}));
+    return next(new ErrorHandlerClass({ message: "can not find users assosiated to this email", position: "at getAllAccountsAssociatedToSpecificRecoveryEmail api", statusCode: 400 }));
 
 }
 
