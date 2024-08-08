@@ -16,13 +16,13 @@ export const sendEmailService = async ({
 
     //transporter configration
     const transporter = nodemailer.createTransport({
-        host: "localhost",
+        host: process.env.HOST,
         port: 587,
         service: "gmail",
         secure: false,
         auth: {
-            user: "mahmoudelziny20@gmail.com",
-            pass: "ylxralzmwrdeleih",
+            user: process.env.NODEMAILER_USER,
+            pass: process.env.NODEMAILER_PASS,
         },
         tls: {
             rejectUnauthorized: true

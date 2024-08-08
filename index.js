@@ -1,17 +1,19 @@
 import express from 'express';
+import { config } from 'dotenv';
 
 import { connectionDB } from "./DB/connection.js";
 import { globalResponse } from './src/middlewares/error-handler.middleware.js';
 import userRouter from './src/modules/User/user.routes.js';
 import companyRouter from './src/modules/Company/company.routes.js'
 
-
+//env file 
+config();
 
 //instance of express module
 const app = express();
 
 //port number 
-const port = 3000;
+const port = +process.env.PORT;
 
 //database connection
 connectionDB();
