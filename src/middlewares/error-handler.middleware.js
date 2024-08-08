@@ -30,7 +30,7 @@ export const errorHandle = (API) => {
 export const globalResponse = (err, req, res, next) => {
     if(err){
         res.status(err["statusCode"] || 500 ).json({
-            message: "Error",
+            message: "Error response",
             error: err.message,
             stack: err.stack,
             position: err.position,

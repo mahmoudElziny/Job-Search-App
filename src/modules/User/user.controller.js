@@ -35,7 +35,7 @@ export const signUp = async (req, res, next) => {
     }
 
     //hashing the password
-    const hashedPassword = hashSync(password, 12);
+    const hashedPassword = hashSync(password, +process.env.SALT_ROUNDS);
 
     //create new user object
     const userObject = new userModel({
@@ -254,7 +254,7 @@ export const updatePassword = async (req, res, next) => {
         //check if password match
         if (passCheck) {
             //hashing the password
-            const hashedPassword = hashSync(newPassword, 12);
+            const hashedPassword = hashSync(newPassword, +process.env.SALT_ROUNDS);
             //update the new password
             await userModel.updateOne({ _id: new ObjectId(_id) }, { password: hashedPassword });
             //returning success response
@@ -347,7 +347,7 @@ export const passwordReset = async (req, res, next) => {
     //check if OTB right & not expired
     if (otb == user.OTB && date <= user.OTBExpireDate) {
         //hashing the new password
-        const hashedPassword = hashSync(newpassword, 12);
+        const hashedPassword = hashSync(newpassword, +process.env.SALT_ROUNDS);
         //update the new password 
         const userConfirmation = await userModel.findOneAndUpdate({ email }, { password: hashedPassword, status: "offline" }, { new: true }).select("-password -OTB");
         //check if user updated successully 

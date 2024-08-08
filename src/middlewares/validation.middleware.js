@@ -1,7 +1,7 @@
 import { ErrorHandlerClass } from "../utils/error-class.utils.js";
 
 // all request keys array
-const reqKeys = ["body", "params", "query", "headers"];
+const reqKeys = ["body", "params", "query", "headers", "file", "files"];
 
 /**
  * validation Middleware
