@@ -1,4 +1,3 @@
-import { required } from "joi";
 import mongoose, {Schema, model} from "mongoose";
 
 //application database schema 
@@ -14,24 +13,13 @@ const applicationSchema = new Schema(
             ref: "User",
             required: true
         },
-        userTechSkills: [{
-            skill: {
-                type: String,
-                required: true,
-                trim: true,
-                minlength: 2,
-                maxlength: 14
-            }
-        }],
-        userSoftSkills: [{
-            skill: {
-                type: String,
-                required: true,
-                trim: true,
-                minlength: 2,
-                maxlength: 14
-            }
-        }], 
+        companyId: {
+            type: Schema.Types.ObjectId,
+            ref: "Company",
+            required: true
+        },
+        userTechSkills: [String],
+        userSoftSkills: [String], 
         userResume : {
             asset_id: {
                 type: String,

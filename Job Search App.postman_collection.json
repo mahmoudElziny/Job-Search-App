@@ -1,0 +1,906 @@
+{
+	"info": {
+		"_postman_id": "0ac70ea9-b3eb-4b5d-9c24-570ea9110318",
+		"name": "Job Search App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30232565"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "signUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"huda\",\r\n    \"lastName\": \"mohamed\",\r\n    \"email\": \"zekaelziny40@gmail.com\",\r\n    \"password\": \"Zz!?123456\",\r\n    \"recoveryEmail\": \"zekaelziny10@gmail.com\",\r\n    \"DOB\": \"05/10/1998\",\r\n    \"mobileNumber\": \"01156864444\",\r\n    \"role\": \"company_HR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/user/signUp",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"signUp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signIn",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mobileNumber\":\"01006234513\",\r\n    \"password\": \"Zz!?123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/user/signIn",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"signIn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAccount",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmFjOWI4MWM3N2IzZTNhMzc1OTA2OWMiLCJ1c2VyTmFtZSI6Im1haG1vdWRlbHplbnkiLCJlbWFpbCI6Inpla2FlbHppbnkyMEBnbWFpbC5jb20iLCJET0IiOiIxOTk4LTA1LTA3VDIxOjAwOjAwLjAwMFoiLCJyb2xlIjoidXNlciIsImlhdCI6MTcyMjY5MjE4NSwiZXhwIjoxNzI0NDIwMTg1fQ.VlxlpazY-RTppnKm1DPgRKKsIjHqFmnHiKlPs5OnZ-M",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/user/updateAccount",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"updateAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAccount",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmFjOWI4MWM3N2IzZTNhMzc1OTA2OWMiLCJ1c2VyTmFtZSI6Im1haG1vdWRlbHplbnkiLCJlbWFpbCI6Inpla2FlbHppbnkyMEBnbWFpbC5jb20iLCJET0IiOiIxOTk4LTA1LTA3VDIxOjAwOjAwLjAwMFoiLCJyb2xlIjoidXNlciIsImlhdCI6MTcyMjY5MjE4NSwiZXhwIjoxNzI0NDIwMTg1fQ.VlxlpazY-RTppnKm1DPgRKKsIjHqFmnHiKlPs5OnZ-M",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:3000/user/deleteAccount",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"deleteAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserData",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmFlNDk2MzMxNjY1MjhkMGRkYTdjZTYiLCJ1c2VyTmFtZSI6Im1haG1vdWRlbHplbnkiLCJlbWFpbCI6Inpla2FlbHppbnkyMEBnbWFpbC5jb20iLCJET0IiOiIxOTk4LTA1LTA3VDIxOjAwOjAwLjAwMFoiLCJyb2xlIjoidXNlciIsImlhdCI6MTcyMjY5ODMyMywiZXhwIjoxNzI0NDI2MzIzfQ.Y3pYbs9S5orRtvjE9d4cnpUax_LVyKYGsUO23SBRhkk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:3000/user/getUserData",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"getUserData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAnyUserDatabyId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/user/getAnyUserDatabyId",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"getAnyUserDatabyId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePassword",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmFlNDk2MzMxNjY1MjhkMGRkYTdjZTYiLCJ1c2VyTmFtZSI6Im1haG1vdWRlbHplbnkiLCJlbWFpbCI6Inpla2FlbHppbnkyMEBnbWFpbC5jb20iLCJET0IiOiIxOTk4LTA1LTA3VDIxOjAwOjAwLjAwMFoiLCJyb2xlIjoidXNlciIsImlhdCI6MTcyMjY5ODMyMywiZXhwIjoxNzI0NDI2MzIzfQ.Y3pYbs9S5orRtvjE9d4cnpUax_LVyKYGsUO23SBRhkk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"Zz!?123456\" ,\r\n    \"newPassword\": \"Zz!?1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/user/updatePassword",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"updatePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgetPassword",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"zekaelziny20@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/user/forgetPassword",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"forgetPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "passwordReset",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "email",
+								"value": "zekaelziny20@gmail.com",
+								"type": "text"
+							},
+							{
+								"key": "otb",
+								"value": "692783",
+								"type": "text"
+							},
+							{
+								"key": "newpassword",
+								"value": "Zz!?123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:3000/user/passwordReset",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"passwordReset"
+							],
+							"query": [
+								{
+									"key": "OTB",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "newPassword",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllAccountsAssociatedToSpecificRecoveryEmail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"zekaelziny10@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/user/getAllAccountsAssociatedToSpecificRecoveryEmail",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"getAllAccountsAssociatedToSpecificRecoveryEmail"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Companies",
+			"item": [
+				{
+					"name": "addCompany",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmFmZDczNTAyZTE5NjVhMjIzMmU3NjUiLCJ1c2VyTmFtZSI6Im1vaGFuZGFsaSIsImVtYWlsIjoiemVrYWVsemlueTQwQGdtYWlsLmNvbSIsIkRPQiI6IjE5OTgtMDUtMDlUMjE6MDA6MDAuMDAwWiIsInJvbGUiOiJjb21wYW55X0hSIiwic3RhdHVzIjoib25saW5lIiwiaWF0IjoxNzIyODc0ODg1LCJleHAiOjE3MjQ2MDI4ODV9.VbgqgRKbs2w0X8COF8NBdoExhBMHyEWIU4h2lcuOhjU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyName\": \"AMC\" ,\r\n    \"description\": \"production company that films videos\",\r\n    \"industry\": \"pharmatical\",\r\n    \"address\": \"115 omar ibn elkhatab street , almazah\" ,\r\n    \"numberOfEmployees\": 20,\r\n    \"companyEmail\": \"zekaelziny30@gmail.com\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/company/addCompany",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"company",
+								"addCompany"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCompany",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmIwZjViZDNlOWM4YWM3OWM5ZjFlNjEiLCJ1c2VyTmFtZSI6Imh1ZGFtb2hhbWVkIiwiZW1haWwiOiJ6ZWthZWx6aW55NTBAZ21haWwuY29tIiwiRE9CIjoiMTk5OC0wNS0wOVQyMTowMDowMC4wMDBaIiwicm9sZSI6ImNvbXBhbnlfSFIiLCJzdGF0dXMiOiJvbmxpbmUiLCJpYXQiOjE3MjI4NzM0NTgsImV4cCI6MTcyNDYwMTQ1OH0.cTt0S6K92jqY23OpVWYdtZesRycSeHIJn69zhWhMMkI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyEmail\": \"zekaelziny20@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/company/updateCompany",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"company",
+								"updateCompany"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCompany",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmFmZDczNTAyZTE5NjVhMjIzMmU3NjUiLCJ1c2VyTmFtZSI6Im1vaGFuZGFsaSIsImVtYWlsIjoiemVrYWVsemlueTQwQGdtYWlsLmNvbSIsIkRPQiI6IjE5OTgtMDUtMDlUMjE6MDA6MDAuMDAwWiIsInJvbGUiOiJjb21wYW55X0hSIiwic3RhdHVzIjoib25saW5lIiwiaWF0IjoxNzIyODc1NzQzLCJleHAiOjE3MjQ2MDM3NDN9.RmzIIG8ZF4aRPDd9HljYgSMFWYXy1tYrM5ovMO01wUg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/company/deleteCompany/66b0ff6ab4647ccf260d8b7a",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"company",
+								"deleteCompany",
+								"66b0ff6ab4647ccf260d8b7a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCompanyData",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:3000/company/getCompanyData/66b0f6333e9c8ac79c9f1e66",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"company",
+								"getCompanyData",
+								"66b0f6333e9c8ac79c9f1e66"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCompanyDataByName",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmIwZjViZDNlOWM4YWM3OWM5ZjFlNjEiLCJ1c2VyTmFtZSI6Imh1ZGFtb2hhbWVkIiwiZW1haWwiOiJ6ZWthZWx6aW55NTBAZ21haWwuY29tIiwiRE9CIjoiMTk5OC0wNS0wOVQyMTowMDowMC4wMDBaIiwicm9sZSI6ImNvbXBhbnlfSFIiLCJzdGF0dXMiOiJvbmxpbmUiLCJpYXQiOjE3MjMxNTA0MDYsImV4cCI6MTcyNDg3ODQwNn0.7fzr-cgsSy1elp_2hdLPizPM5kdkFckGgoaKG_wytdg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyName\": \"AMC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/company/getCompanyDataByName",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"company",
+								"getCompanyDataByName"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllApplicationsForSpecificJob",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmIwZjViZDNlOWM4YWM3OWM5ZjFlNjEiLCJ1c2VyTmFtZSI6Imh1ZGFtb2hhbWVkIiwiZW1haWwiOiJ6ZWthZWx6aW55NTBAZ21haWwuY29tIiwiRE9CIjoiMTk5OC0wNS0wOVQyMTowMDowMC4wMDBaIiwicm9sZSI6ImNvbXBhbnlfSFIiLCJzdGF0dXMiOiJvbmxpbmUiLCJpYXQiOjE3MjMzMDc3MjYsImV4cCI6MTcyNTAzNTcyNn0.KQkVZGGUEGU9vPE9Om3uBV0-QeqH3f9tsrL9NyvaLa0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:3000/company/getAllApplicationsForSpecificJob/66b628f79c554f9e9b89c4ab",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"company",
+								"getAllApplicationsForSpecificJob",
+								"66b628f79c554f9e9b89c4ab"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Jobs",
+			"item": [
+				{
+					"name": "addJob",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmFmZDczNTAyZTE5NjVhMjIzMmU3NjUiLCJ1c2VyTmFtZSI6Im1vaGFuZGFsaSIsImVtYWlsIjoiemVrYWVsemlueTQwQGdtYWlsLmNvbSIsIkRPQiI6IjE5OTgtMDUtMDlUMjE6MDA6MDAuMDAwWiIsInJvbGUiOiJjb21wYW55X0hSIiwic3RhdHVzIjoib25saW5lIiwiaWF0IjoxNzIzMTUzNjQzLCJleHAiOjE3MjQ4ODE2NDN9.BcMF78Iz7qHkxkqwWPrVyBx-MDqnyxTfnbjgm0NDbwI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jobTitle\": \"Nodejs Developer\",\r\n    \"jobLocation\": \"onsite\",\r\n    \"workingTime\": \"full-time\" ,\r\n    \"seniorityLevel\":  \"junior\",\r\n    \"jobDescription\": \"bulid frontend web pages user freindly using reactjs framework\",\r\n    \"technicalSkills\": [\"html\", \"css\", \"javascript\", \"express\", \"nodejs\", \"nestjs\"],\r\n    \"softSkills\": [\"teamwork\", \"work under preasure\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/job/addJob",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"job",
+								"addJob"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateJob",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmFmZDczNTAyZTE5NjVhMjIzMmU3NjUiLCJ1c2VyTmFtZSI6Im1vaGFuZGFsaSIsImVtYWlsIjoiemVrYWVsemlueTQwQGdtYWlsLmNvbSIsIkRPQiI6IjE5OTgtMDUtMDlUMjE6MDA6MDAuMDAwWiIsInJvbGUiOiJjb21wYW55X0hSIiwic3RhdHVzIjoib25saW5lIiwiaWF0IjoxNzIzMTUzNjQzLCJleHAiOjE3MjQ4ODE2NDN9.BcMF78Iz7qHkxkqwWPrVyBx-MDqnyxTfnbjgm0NDbwI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/job/updateJob",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"job",
+								"updateJob"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteJob",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmIwZjViZDNlOWM4YWM3OWM5ZjFlNjEiLCJ1c2VyTmFtZSI6Imh1ZGFtb2hhbWVkIiwiZW1haWwiOiJ6ZWthZWx6aW55NTBAZ21haWwuY29tIiwiRE9CIjoiMTk5OC0wNS0wOVQyMTowMDowMC4wMDBaIiwicm9sZSI6ImNvbXBhbnlfSFIiLCJzdGF0dXMiOiJvbmxpbmUiLCJpYXQiOjE3MjMxNTUwMzcsImV4cCI6MTcyNDg4MzAzN30.dvuRCPMIkUO_ybT-OHbtdqFhWnU6FLbsSEX6C82SAWM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:3000/job/deleteJob/66b4fcad46ab08bf8dadca16",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"job",
+								"deleteJob",
+								"66b4fcad46ab08bf8dadca16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllJobsWithTheirCompanyInformation",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token ",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmFmZDczNTAyZTE5NjVhMjIzMmU3NjUiLCJ1c2VyTmFtZSI6Im1vaGFuZGFsaSIsImVtYWlsIjoiemVrYWVsemlueTQwQGdtYWlsLmNvbSIsIkRPQiI6IjE5OTgtMDUtMDlUMjE6MDA6MDAuMDAwWiIsInJvbGUiOiJjb21wYW55X0hSIiwic3RhdHVzIjoib25saW5lIiwiaWF0IjoxNzIzMTUzNjQzLCJleHAiOjE3MjQ4ODE2NDN9.BcMF78Iz7qHkxkqwWPrVyBx-MDqnyxTfnbjgm0NDbwI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:3000/job/getAllJobsWithTheirCompanyInformation",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"job",
+								"getAllJobsWithTheirCompanyInformation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllJobsForASpecificCompany",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:3000/job/getAllJobsForASpecificCompany?companyName=AMC",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"job",
+								"getAllJobsForASpecificCompany"
+							],
+							"query": [
+								{
+									"key": "companyName",
+									"value": "AMC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllJobsThatMatchTheSelectedFilters",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmFlNDk2MzMxNjY1MjhkMGRkYTdjZTYiLCJ1c2VyTmFtZSI6Im1haG1vdWRlbHplbnkiLCJlbWFpbCI6Inpla2FlbHppbnkyMEBnbWFpbC5jb20iLCJET0IiOiIxOTk4LTA1LTA3VDIxOjAwOjAwLjAwMFoiLCJyb2xlIjoidXNlciIsInN0YXR1cyI6Im9ubGluZSIsImlhdCI6MTcyMzIxNDY3OSwiZXhwIjoxNzI0OTQyNjc5fQ.BbwVhzzRzlnge_bw4jFyTVCP8_uxanTIuRhUB-LTDF0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"workingTime\": \"part-time\",\r\n    \"jobLocation\": \"remotely\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/job/getAllJobsThatMatchTheSelectedFilters",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"job",
+								"getAllJobsThatMatchTheSelectedFilters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "applyToJob",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmIwZjViZDNlOWM4YWM3OWM5ZjFlNjEiLCJ1c2VyTmFtZSI6Imh1ZGFtb2hhbWVkIiwiZW1haWwiOiJ6ZWthZWx6aW55NTBAZ21haWwuY29tIiwiRE9CIjoiMTk5OC0wNS0wOVQyMTowMDowMC4wMDBaIiwicm9sZSI6ImNvbXBhbnlfSFIiLCJzdGF0dXMiOiJvbmxpbmUiLCJpYXQiOjE3MjMzMjk0MTAsImV4cCI6MTcyNTA1NzQxMH0.FlIjbnVNxjkOYn2hnbF_U9EeE-YCIpCo6VuP1_g7vrY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userResume",
+									"type": "file",
+									"src": "/G:/CV's & Portfolio/Mahmoud Elzeny Resume.pdf"
+								},
+								{
+									"key": "jobId",
+									"value": "66b628f79c554f9e9b89c4ab",
+									"type": "text"
+								},
+								{
+									"key": "userTechSkills",
+									"value": "nodejs",
+									"type": "text"
+								},
+								{
+									"key": "userTechSkills",
+									"value": "nestjs",
+									"type": "text"
+								},
+								{
+									"key": "userTechSkills",
+									"value": "expressjs",
+									"type": "text"
+								},
+								{
+									"key": "userSoftSkills",
+									"value": "teamwork",
+									"type": "text"
+								},
+								{
+									"key": "userSoftSkills",
+									"value": "work under preasure",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/job/applyToJob",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"job",
+								"applyToJob"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Applications",
+			"item": [
+				{
+					"name": "applicationsForASpecificCompanyOnASpecificDayAndCreatesAnExcelSheet",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "jobSearchApp eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmIwZjViZDNlOWM4YWM3OWM5ZjFlNjEiLCJ1c2VyTmFtZSI6Imh1ZGFtb2hhbWVkIiwiZW1haWwiOiJ6ZWthZWx6aW55NTBAZ21haWwuY29tIiwiRE9CIjoiMTk5OC0wNS0wOVQyMTowMDowMC4wMDBaIiwicm9sZSI6ImNvbXBhbnlfSFIiLCJzdGF0dXMiOiJvbmxpbmUiLCJpYXQiOjE3MjMzMDc3MjYsImV4cCI6MTcyNTAzNTcyNn0.KQkVZGGUEGU9vPE9Om3uBV0-QeqH3f9tsrL9NyvaLa0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2024-08-10\",\r\n    \"companyId\": \"66b0f6333e9c8ac79c9f1e66\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/application/applicationsForASpecificCompanyOnASpecificDayAndCreatesAnExcelSheet",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"application",
+								"applicationsForASpecificCompanyOnASpecificDayAndCreatesAnExcelSheet"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

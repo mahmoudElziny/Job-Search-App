@@ -39,7 +39,8 @@ const companySchema = new Schema(
         companyHR: {
             type: Schema.Types.ObjectId,
             ref: "User",
-            required: true 
+            required: true,
+            unique: true
         }
     },
     {timestamps: true , versionKey: false}

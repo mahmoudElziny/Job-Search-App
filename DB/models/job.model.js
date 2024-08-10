@@ -33,27 +33,16 @@ const jobSchema = new Schema(
             required: true,
             trim: true
         },
-        technicalSkills: [{
-            skill: {
-                type: String,
-                required: true,
-                minlength: 2,
-                maxlength: 14,
-                trim: true
-            }
-        }],
-        softSkills: [{
-            skill: {
-                type: String,
-                required: true,
-                minlength: 2,
-                maxlength: 14,
-                trim: true
-            }
-        }],
+        technicalSkills: [String],
+        softSkills: [String],
         addedBy: {
             type: Schema.Types.ObjectId,
             ref: "User",
+            required: true 
+        },
+        companyId: {
+            type: Schema.Types.ObjectId,
+            ref: "Company",
             required: true 
         }
     },

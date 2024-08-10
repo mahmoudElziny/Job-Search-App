@@ -11,7 +11,6 @@ export const errorHandle = (API) => {
     return (req, res, next) => {
         API(req, res, next).catch(
             (err) => {
-                console.log("Error in errorHandle middleware", err);
                 next( new ErrorHandlerClass( {message: err.message, statusCode: err.statusCode, stack: err.stack, position: err.position, data: err.data} ) );
             }
         );       
