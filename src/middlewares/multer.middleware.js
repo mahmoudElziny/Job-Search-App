@@ -85,10 +85,10 @@ export const multerHost = ({allowedExtentions = extentions.Images}={}) => {
         //if error
         cb(new ErrorHandlerClass({message: "Invalid file type , only pdf file allowed", statusCode: 400, position: "at multerMiddleware"}), false);
     }
-    
+
     //assign the multer function with params ( file filtration & storage information ) to const var file 
     const file = multer({ fileFilter, storage});
+        
     //returning multer file to next middleware
-    return file; 
-
+    return file;     
 }
